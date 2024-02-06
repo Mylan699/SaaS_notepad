@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { ThemeToggle } from "./components/Themetoggle";
 
 export default function Home() {
   return (
-    <h1>
-      SaaS NotePad
-    </h1>
+    <div>
+      <ThemeToggle/>
+    </div>
   );
 }

@@ -3,6 +3,7 @@ import { ThemeToggle } from "./Themetoggle";
 import { Button } from "@/components/ui/button";
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { UserNav } from "./UserNav";
 
 
 
@@ -12,20 +13,20 @@ export async function Navbar() {
         <nav className="border-b bg-background h-[10vh] flex items-center" >
             <div className="container flex items-center justify-between">
                 <Link href={"/"}>
-                    <h1 className="font-bold text-3xl">NotPadSaaS</h1>
+                    <h1 className="font-bold text-3xl">Notepad<span className="text-primary">SaaS</span></h1>
                 </Link>
 
                 <div className="flex items-center gap-x-5">
                     <ThemeToggle />
 
                     {await isAuthenticated() ? (
-                        <LogoutLink>
-                            <Button>Se déconnecter</Button>
-                        </LogoutLink>
+                        
+                            <UserNav />
+                        
                     ) : (
                         <div className="flex items-center gap-x-5">
                             <LoginLink>
-                                <Button>Se Connecter</Button>
+                                <Button>Se Connecter</Button>   {/* vokota7632@namewok.com / wFvKTaEL3M2KkaQ */}
                             </LoginLink>
 
                             <RegisterLink>

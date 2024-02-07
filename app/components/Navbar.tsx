@@ -11,7 +11,7 @@ export async function Navbar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const user = await getUser()
     
-    console.log(user?.picture)
+    // console.log(user?.picture)
     return (
         <nav className="border-b bg-background h-[10vh] flex items-center" >
             <div className="container flex items-center justify-between">

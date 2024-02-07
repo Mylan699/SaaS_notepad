@@ -8,7 +8,10 @@ import { UserNav } from "./UserNav";
 
 
 export async function Navbar() {
-    const { isAuthenticated } = getKindeServerSession();
+    const { isAuthenticated, getUser } = getKindeServerSession();
+    const user = await getUser()
+    
+    console.log(user?.picture)
     return (
         <nav className="border-b bg-background h-[10vh] flex items-center" >
             <div className="container flex items-center justify-between">
@@ -20,17 +23,15 @@ export async function Navbar() {
                     <ThemeToggle />
 
                     {await isAuthenticated() ? (
-                        
-                            <UserNav />
-                        
+                        <UserNav email={user?.email as string} image={user?.picture as string} name={user?.given_name as string}/>
                     ) : (
                         <div className="flex items-center gap-x-5">
                             <LoginLink>
-                                <Button>Se Connecter</Button>   {/* vokota7632@namewok.com / wFvKTaEL3M2KkaQ */}
+                                <Button >Se Connecter</Button>   {/* vokota7632@namewok.com / wFvKTaEL3M2KkaQ */}
                             </LoginLink>
 
                             <RegisterLink>
-                                <Button variant="secondary">S&apos;inscrire</Button>
+                                <Button variant="secondary" >S&apos;inscrire</Button>
                             </RegisterLink>
                         </div>
                     )}

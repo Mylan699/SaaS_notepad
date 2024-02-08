@@ -27,7 +27,7 @@ export async function Navbar() {
                     ) : (
                         <div className="flex items-center gap-x-5">
                             <LoginLink>
-                                <Button >Se Connecter</Button>   {/* vokota7632@namewok.com / wFvKTaEL3M2KkaQ */}
+                                <Button >Se Connecter</Button>   {/* kefiba4849@rohoza.com / wFvKTaEL3M2KkaQ */}
                             </LoginLink>
 
                             <RegisterLink>

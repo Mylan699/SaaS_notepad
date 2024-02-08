@@ -6,6 +6,7 @@ import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/app/components/Submitbuttons";
+import { revalidatePath } from "next/cache";
 
 
 async function getData(userId: string) {
@@ -43,6 +44,8 @@ export default async function SettingPage() {
                 colorScheme: colorScheme ?? undefined,
             },
         });
+
+        revalidatePath("/", "layout");
     }
 
     return (

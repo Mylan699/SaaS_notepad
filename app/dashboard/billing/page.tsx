@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import prisma from "@/app/lib/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getStripeSession } from "@/app/lib/stripe";
+import { redirect } from "next/navigation";
+import { StripeSubscritpionCreationButton } from "@/app/components/Submitbuttons";
+
 
 const featureItems = [
     { name: 'Accès illimité' },
@@ -25,9 +30,40 @@ async function getData(userId: string) {
             },
         },
     });
+    return data;
 }
 
-export default function BillingPage() {
+export default async function BillingPage() {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser()
+    const data = await getData(user?.id as string);
+
+
+    async function createSubscription() {
+        "use server";
+
+        const dbUser = await prisma.user.findUnique({
+            where: {
+                id: user?.id,
+            },
+            select: {
+                stripeCustomerId: true,
+            },
+        });
+
+        if (!dbUser?.stripeCustomerId) {
+            throw new Error("Impossible d'obtenir l'ID du client");
+        }
+
+        const subscriptionUrl = await getStripeSession({
+            customerId: dbUser.stripeCustomerId,
+            domainUrl: "http://localhost:3000",
+            priceId: process.env.STRIPE_PRICE_ID as string,
+        });
+
+        return redirect(subscriptionUrl);
+    }
+
     return (
         <div className="max-w-md mx-auto space-y-4">
             <Card className="flex flex-col">
@@ -49,15 +85,15 @@ export default function BillingPage() {
                         {featureItems.map((item, index) => (
                             <li key={index} className="flex items-center">
                                 <div className="flex-shrink-0">
-                                    <CheckCircle2 className="h-6 w-6 text-green-500"/>
+                                    <CheckCircle2 className="h-6 w-6 text-green-500" />
                                 </div>
                                 <p className="ml-3 text-base">{item.name}</p>
                             </li>
-                        )  )}
+                        ))}
                     </ul>
 
-                    <form className="w-full">
-                        <Button className="w-full">Souscrire maintenant</Button>
+                    <form className="w-full" action={createSubscription}>
+                        <StripeSubscritpionCreationButton />
                     </form>
                 </div>
             </Card>

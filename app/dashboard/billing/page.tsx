@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
+import prisma from "@/app/lib/db";
 
 const featureItems = [
     { name: 'Accès illimité' },
@@ -8,10 +9,25 @@ const featureItems = [
     { name: 'Organiser vos notes efficacement' },
     { name: 'Sauvegarde et accessibilité' },
     { name: 'Accès et mise à jour instantanés' },
+];
 
-]
+async function getData(userId: string) {
+    const data = await prisma.subscription.findUnique({
+        where: {
+            userId: userId,
+        },
+        select: {
+            status: true,
+            user: {
+                select: {
+                    stripeCustomerId: true
+                },
+            },
+        },
+    });
+}
 
-export default function Billingage() {
+export default function BillingPage() {
     return (
         <div className="max-w-md mx-auto space-y-4">
             <Card className="flex flex-col">

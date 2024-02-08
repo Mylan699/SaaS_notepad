@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/app/components/Submitbuttons";
 
 
 async function getData(userId: string) {
@@ -63,11 +64,11 @@ export default async function SettingPage() {
                         <div className="space-y-2">
                             <div className="space-y-1">
                                 <Label>Votre Nom</Label>
-                                <Input name="nom" defaultValue={data?.name ?? undefined} type="text" placeholder="Votre Nom" id="name"   />
+                                <Input name="name" type="text" id="name" placeholder="Votre Nom" defaultValue={data?.name ?? undefined}  />
                             </div>
                             <div className="space-y-1">
                                 <Label>Votre Email</Label>
-                                <Input name="email" defaultValue={data?.email as string} type="email" placeholder="Votre Email" id="email"  disabled  />
+                                <Input name="email"  type="email" id="email" placeholder="Votre Email"  defaultValue={data?.email as string} disabled  />
                             </div>
 
                             <div className="space-y-1">
@@ -85,7 +86,7 @@ export default async function SettingPage() {
                                             <SelectItem value="theme-orange">Orange</SelectItem>
                                             <SelectItem value="theme-violet">Violet</SelectItem>
                                             <SelectItem value="theme-red">Rouge</SelectItem>
-                                            <SelectItem value="theme-red">Rose</SelectItem>
+                                            <SelectItem value="theme-rose">Rose</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
@@ -94,7 +95,7 @@ export default async function SettingPage() {
                     </CardContent>
 
                     <CardFooter>
-                        <Button>Sauvegarder</Button>
+                        <SubmitButton />
                     </CardFooter>
                 </form>
             </Card>

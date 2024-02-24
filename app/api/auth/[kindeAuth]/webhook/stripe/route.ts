@@ -7,11 +7,11 @@ export async function POST(req: Request) {
 
     const signature = headers().get('Stripe-signature')
 
-    let event: Stripe.Event 
+    let event: Stripe.Event
 
     try {
 
-    } catch (error: unknow) {
-        return new Response
+    } catch (error: unknown) {
+        return new Response('webhook error', { status: 404 });
     }
 }

@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const { isAuthenticated } = getKindeServerSession();
 
-  if(await isAuthenticated()) {
+  if (await isAuthenticated()) {
     return redirect("/dashboard");
   }
   return (
@@ -24,16 +24,16 @@ export default async function Home() {
             <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:text-6xl">Créer une note facilement</h1>
 
             <p className="max-w-xl mx-auto mt-8 text-base lg:text-xl textsecondary-foreground">
-              
-Découvrez notre solution SaaS innovante de prise et gestion de notes, conçue pour dynamiser votre productivité et organiser vos idées avec une facilité déconcertante. Notre plateforme web intuitive vous permet de capturer, de gérer et de partager vos notes et vos idées depuis n&apos;importe quel appareil, assurant une synchronisation parfaite entre vos différents supports. Que vous soyez en réunion, en conférence ou simplement en train de brainstormer seul, notre outil s&apos;adapte à vos besoins.
+
+              Découvrez notre solution SaaS innovante de prise et gestion de notes, conçue pour dynamiser votre productivité et organiser vos idées avec une facilité déconcertante. Notre plateforme web intuitive vous permet de capturer, de gérer et de partager vos notes et vos idées depuis n&apos;importe quel appareil, assurant une synchronisation parfaite entre vos différents supports. Que vous soyez en réunion, en conférence ou simplement en train de brainstormer seul, notre outil s&apos;adapte à vos besoins.
             </p>
           </div>
 
           <div className="flex justify-center max-w-sm mx-auto mt-10">
             <RegisterLink>
-            <Button size="lg" className="w-full">
-              S&apos;inscrire gratuitement
-            </Button>
+              <Button size="lg" className="w-full">
+                S&apos;inscrire gratuitement
+              </Button>
             </RegisterLink>
           </div>
         </div>
